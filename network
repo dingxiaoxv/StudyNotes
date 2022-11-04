@@ -1,0 +1,154 @@
+# 网络管理命令
+
+# 1. w命令 查看用户登录详细信息
+
+```bash
+$ w
+ 10:02:37 up 29 min,  1 user,  load average: 0.94, 0.43, 0.64
+USER     TTY      来自           LOGIN@   IDLE   JCPU   PCPU WHAT
+dyx      :1       :1               09:35   ?xdm?   8:45   0.01s /usr/libexec/gd
+```
+
+tty：本地登录；pts远程终端
+
+up：系统连续运行的时间
+
+load average：系统负载
+
+IDLE：累计空闲时间
+
+JCPU：占用CPU时间
+
+# 2. ifconfig命令 查看和设置网卡信息
+
+语法：ifconfig 网卡名称 IP地址
+
+```bash
+$ ifconfig
+enp3s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether d4:81:d7:5b:cd:3a  txqueuelen 1000  (以太网)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (本地环回)
+        RX packets 37818  bytes 33183918 (33.1 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 37818  bytes 33183918 (33.1 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp2s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.67.138  netmask 255.255.240.0  broadcast 192.168.79.255
+        inet6 fe80::f4ea:f4e3:262e:d5ef  prefixlen 64  scopeid 0x20<link>
+        ether 70:1c:e7:5a:cc:65  txqueuelen 1000  (以太网)
+        RX packets 67157  bytes 71765884 (71.7 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 42863  bytes 8823344 (8.8 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+# 3. last命令 列出所有登入系统的用户信息
+
+```bash
+$ last
+dyx      :1           :1               Sun Oct 23 09:35   still logged in
+reboot   system boot  5.15.0-52-generi Sun Oct 23 09:33   still running
+dyx      :1           :1               Sat Oct 22 20:20 - down   (01:50)
+reboot   system boot  5.15.0-52-generi Sat Oct 22 20:17 - 22:10  (01:52)
+dyx      :1           :1               Fri Oct 21 18:20 - down   (02:07)
+reboot   system boot  5.15.0-52-generi Fri Oct 21 18:18 - 20:27  (02:08)
+dyx      :1           :1               Fri Oct 21 13:35 - 13:40  (00:05)
+reboot   system boot  5.15.0-52-generi Fri Oct 21 13:34 - 13:40  (00:06)
+dyx      :1           :1               Fri Oct 21 08:36 - down   (00:32)
+reboot   system boot  5.15.0-50-generi Fri Oct 21 08:35 - 09:09  (00:34)
+dyx      :1           :1               Thu Oct 20 19:00 - down   (03:35)
+reboot   system boot  5.15.0-50-generi Thu Oct 20 18:58 - 22:35  (03:36)
+dyx      :1           :1               Thu Oct 20 17:13 - down   (00:17)
+reboot   system boot  5.15.0-50-generi Thu Oct 20 17:10 - 17:31  (00:21)
+reboot   system boot  5.15.0-50-generi Wed Oct 19 18:52 - 17:31  (22:38)
+dyx      :1           :1               Sun Oct 16 09:30 - down   (00:44)
+reboot   system boot  5.15.0-50-generi Sun Oct 16 09:28 - 10:15  (00:46)
+dyx      :1           :1               Sat Oct 15 22:39 - crash  (10:49)
+reboot   system boot  5.15.0-50-generi Sat Oct 15 22:36 - 10:15  (11:39)
+dyx      :1           :1               Sat Oct 15 22:32 - down   (00:03)
+reboot   system boot  5.15.0-50-generi Sat Oct 15 22:31 - 22:35  (00:04)
+dyx      :1           :1               Sat Oct 15 20:52 - down   (01:38)
+reboot   system boot  5.15.0-50-generi Sat Oct 15 20:51 - 22:30  (01:39)
+dyx      :1           :1               Sat Oct 15 20:09 - down   (00:39)
+reboot   system boot  5.15.0-50-generi Sat Oct 15 20:07 - 20:48  (00:41)
+dyx      tty2         tty2             Sat Oct 15 19:18 - down   (00:18)
+reboot   system boot  5.15.0-50-generi Sat Oct 15 19:16 - 19:36  (00:19)
+dyx      tty2         tty2             Sat Oct 15 17:03 - down   (00:35)
+reboot   system boot  5.15.0-50-generi Sat Oct 15 16:59 - 17:38  (00:39)
+
+wtmp begins Sat Oct 15 16:59:17 2022
+```
+
+# 4. traceroute命令 显示数据到主机的路径
+
+作用：查询网络链路通畅
+
+# 5. netstat命令 显示网络信息
+
+语法：netstat [选项]
+
+选项：
+
+-t : tcp协议
+
+-u : udp协议
+
+-l : 监听
+
+-r : 路由
+
+-n : 显示IP地址和端口
+
+**netstat -tlun**
+
+通过查看开启端口进而查看本机开启的服务
+
+```bash
+$ netstat -tlun
+激活Internet连接 (仅服务器)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 127.0.0.1:7890          0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:42037         0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN     
+tcp6       0      0 ::1:631                 :::*                    LISTEN     
+udp        0      0 0.0.0.0:44245           0.0.0.0:*                          
+udp        0      0 0.0.0.0:52524           0.0.0.0:*                          
+udp        0      0 224.0.0.251:5353        0.0.0.0:*                          
+udp        0      0 224.0.0.251:5353        0.0.0.0:*                          
+udp        0      0 0.0.0.0:5353            0.0.0.0:*                          
+udp        0      0 127.0.0.1:7890          0.0.0.0:*                          
+udp        0      0 127.0.0.53:53           0.0.0.0:*                          
+udp        0      0 0.0.0.0:631             0.0.0.0:*                          
+udp6       0      0 :::5353                 :::*                               
+udp6       0      0 :::54799                :::*                               
+udp6       0      0 :::60209                :::* 
+```
+
+**netstat -an**
+
+查询已连接的服务
+
+**netstat -rn**
+
+查询网关
+
+```bash
+$ netstat -rn
+内核 IP 路由表
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         192.168.64.254  0.0.0.0         UG        0 0          0 wlp2s0
+169.254.0.0     0.0.0.0         255.255.0.0     U         0 0          0 wlp2s0
+192.168.64.0    0.0.0.0         255.255.240.0   U         0 0          0 wlp2s0
+```
+
+192.168.64.254为网关
