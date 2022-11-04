@@ -1,0 +1,89 @@
+# Linux学习笔记-进程管理
+
+# 1. 查看系统中所有进程
+
+## 1.1 ps命令
+
+语法：`ps aux`
+
+查看系统中所有进程，使用BSD操作系统格式
+
+```bash
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0 166764 11756 ?        Ss   15:17   0:01 /sbin/init sp
+dyx         4599  0.0  0.0 33575880 3448 ?       Sl   15:22   0:00 /opt/google/c
+dyx         7953  0.0  0.0  19928  5308 pts/0    Ss   16:00   0:00 bash
+dyx         7971  0.0  0.0  21340  3472 pts/0    R+   16:01   0:00 ps aux
+```
+
+USER：用户
+
+PID：进程PID
+
+%CPU：占用CPU资源百分比
+
+%MEM：占用物理内存百分比
+
+VSZ：占用虚拟内存的大小，单位KB
+
+RSS：占用物理内存的大小，单位KB
+
+TTY：该进程是在哪个终端运行的。其中tty1-tty7代表本地控制台终端，tty1-tty6是本地字符界面终端，tty7是图形终端。pts/0-256代表虚拟终端。
+
+STAT：进程状态。R：运行，S：睡眠，T：停止状态，s：包含子进程，+：位于后台
+
+START：进程起始时间
+
+# 2. 查看系统健康状态
+
+## 2.1 top命令
+
+语法：`top [选项]`
+
+选项：
+
+- -d：更新秒数，默认是3秒
+
+在top命令的交互模式下，按：
+
+- P：CPU使用率排序，降序
+- M：内存使用率排序
+- N：PID排序
+- ?或h：帮助
+- q：退出
+
+![image-20221104165031447](/home/dyx/snap/typora/76/.config/Typora/typora-user-images/image-20221104165031447.png)
+
+load average：系统在之前1分钟、5分钟、15分钟的平均负载
+
+87.5 id：空闲CPU所占百分比
+
+# 3. 终止进程
+
+## 3.1 kill命令
+
+语法：`kill [信号] [进程号]`
+
+![image-20221104171212885](/home/dyx/snap/typora/76/.config/Typora/typora-user-images/image-20221104171212885.png)
+
+常用命令：
+
+`kill -1 [进程号]`
+
+重启进程
+
+`kill -9 [进程号]`
+
+强制杀死进程
+
+## 3.2 pkill命令
+
+按照终端号踢出用户：
+
+`w`
+
+查询本机已登录的用户
+
+`pkill -t -9 [终端号]`
+
+强制终止从终端号登录的进程
